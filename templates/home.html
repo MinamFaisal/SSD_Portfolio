@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="welcome-block">
+    <h1>Welcome to My Portfolio Builder</h1>
+    <p>Create and showcase your professional portfolio!</p>
+    <a href="{{ url_for('create_portfolio') }}" class="btn btn-custom">Create Your Portfolio</a>
+</div>
+
+<style>
+    /* Center the welcome block */
+    .welcome-block {
+        background-color: #FFB38E;
+        border-radius: 10px;
+        padding: 50px;
+        text-align: center;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .welcome-block h1 {
+        color: #db6922;
+        margin-bottom: 10px;
+    }
+
+    .welcome-block p {
+        color: #aa6c36;
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+    }
+
+    .btn-custom {
+        background-color: #DE8F5F;
+        color: rgb(236, 227, 227);
+        border: none;
+        padding: 10px 20px;
+        font-size: 1.2rem;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-custom:hover {
+        background-color: #FFB26F;
+    }
+</style>
+{% endblock %}

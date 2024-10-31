@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center" style="margin-top: 50px;">
+        <!-- Left Side: Image Upload -->
+        <div class="col-md-6">
+            <div class="upload-box text-center">
+                <h3>Upload Your Portfolio Picture</h3>
+                <input type="file" id="imageUpload" accept="image/*" onchange="previewImage(event)" class="form-control mb-3">
+
+                <div class="image-preview">
+                    <img id="imagePreview" src="" alt="Image Preview" class="img-fluid"
+                         style="display:none; max-height: 250px; border-radius: 10px;">
+                    <div id="placeholder" style="display: block; margin-top: 20px;">
+                        <i class="bi bi-image" style="font-size: 80px; color: #DE8F5F;"></i>
+                        <p>No image uploaded</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side: Form Fields -->
+        <div class="col-md-6">
+            <h3>Create Your Portfolio</h3>
+            <form method="POST" action="{{ url_for('create_portfolio') }}" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="firstName" class="form-label">First Name</label>
+                    <input type="text" class="form-control" id="firstName" name="first_name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="lastName" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" id="lastName" name="last_name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="phone" class="form-label">Phone Number</label>
+                    <input type="text" class="form-control" id="phone" name="phone">
+                </div>
+                <div class="mb-3">
+                    <label for="bio" class="form-label">Short Bio</label>
+                    <textarea class="form-control" id="bio" name="bio"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="skills" class="form-label">Skills or Expertise</label>
+                    <input type="text" class="form-control" id="skills" name="skills">
+                </div>
+                <div class="mb-3">
+                    <label for="linkedin" class="form-label">LinkedIn Profile</label>
+                    <input type="text" class="form-control" id="linkedin" name="linkedin">
+                </div>
+                <div class="mb-3">
+                    <label for="github" class="form-label">GitHub Profile</label>
+                    <input type="text" class="form-control" id="github" name="github">
+                </div>
+                <button type="submit" class="btn btn-custom">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    .upload-box {
+        border: 2px dashed #DE8F5F;
+        border-radius: 10px;
+        padding: 20px;
+        text-align: center;
+        background-color: #FFCF9D;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 400px;
+        position: relative;
+        margin-bottom: 30px;
+    }
+
+    .image-preview {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .btn-custom {
+        background-color: #DE8F5F;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 1.2rem;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-custom:hover {
+        background-color: #FFB26F;
+    }
+
+    #placeholder {
+        margin-top: 20px;
+    }
+
+    #placeholder i {
+        font-size: 80px;
+        color: #DE8F5F;
+    }
+
+    #placeholder p {
+        color: #DE8F5F;
+        margin-top: 10px;
+        font-weight: bold;
+    }
+</style>
+
+<script>
+    function previewImage(event) {
+        const imagePreview = document.getElementById('imagePreview');
+        const placeholder = document.getElementById('placeholder');
+        const file = event.target.files[0];
+        const reader = new FileReader();
+
+        reader.onload = function() {
+            imagePreview.src = reader.result;
+            imagePreview.style.display = 'block';
+            placeholder.style.display = 'none';
+        };
+
+        if (file) {
+            reader.readAsDataURL(file);
+        } else {
+            imagePreview.style.display = 'none';
+            placeholder.style.display = 'block';
+        }
+    }
+</script>
+{% endblock %}
